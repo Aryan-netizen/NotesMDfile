@@ -43,12 +43,14 @@ Create different components for different routes:
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import About from './pages/About';
+import UserProfile from './pages/UserProfile';
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/about" element={<About />} />
+      <Route path="/user/:username" element={<UserProfile />} />
     </Routes>
   );
 }
@@ -75,6 +77,19 @@ function About() {
 export default About;
 ```
 
+#### `pages/UserProfile.jsx`
+```jsx
+import { useParams } from 'react-router-dom';
+
+function UserProfile() {
+  const { username } = useParams();
+
+  return <h1>Welcome, {username}!</h1>;
+}
+
+export default UserProfile;
+```
+
 ### 6. Add Navigation
 Modify `App.jsx` to include navigation:
 
@@ -83,6 +98,7 @@ import { Link } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import About from './pages/About';
+import UserProfile from './pages/UserProfile';
 
 function App() {
   return (
@@ -90,10 +106,12 @@ function App() {
       <nav>
         <Link to="/">Home</Link>
         <Link to="/about">About</Link>
+        <Link to="/user/Aryan">User Profile</Link>
       </nav>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/user/:username" element={<UserProfile />} />
       </Routes>
     </>
   );
